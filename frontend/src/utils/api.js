@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // In production, this should come from import.meta.env.VITE_API_URL
 const getBaseUrl = () => {
-    let url = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+    let url = import.meta.env.VITE_API_URL || 'https://moonstonecafe.onrender.com/api';
 
     // If the URL comes from Render (via "property: host"), it might lack the protocol
     if (url && !url.startsWith('http')) {

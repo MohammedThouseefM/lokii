@@ -141,7 +141,7 @@ const Menu = () => {
                                     {/* Image Top */}
                                     <div className="aspect-[4/3] overflow-hidden">
                                         <img
-                                            src={item.image_url ? (item.image_url.startsWith('http') ? item.image_url : `${(import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')}${item.image_url}`) : 'https://via.placeholder.com/400'}
+                                            src={item.image_url ? (item.image_url.startsWith('http') ? item.image_url : `${(import.meta.env.VITE_API_URL || 'https://moonstonecafe.onrender.com/api').replace(/\/api$/, '')}${item.image_url}`) : 'https://via.placeholder.com/400'}
                                             alt={item.name}
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />

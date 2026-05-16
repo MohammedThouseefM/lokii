@@ -10,7 +10,7 @@ export const SocketProvider = ({ children }) => {
 
     useEffect(() => {
         // Get the base URL from the same logic as api.js but without the /api suffix
-        let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        let apiUrl = import.meta.env.VITE_API_URL || 'https://moonstonecafe.onrender.com';
         
         if (apiUrl && !apiUrl.startsWith('http')) {
             apiUrl = `https://${apiUrl}`;

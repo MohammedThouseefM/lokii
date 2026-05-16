@@ -8,7 +8,7 @@ import { FaCamera, FaSpinner } from 'react-icons/fa';
 const getAvatarSrc = (url) => {
     if (!url) return 'https://www.w3schools.com/howto/img_avatar.png';
     if (url.startsWith('http') || url.startsWith('blob:')) return url;
-    return `${(import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')}${url}`;
+    return `${(import.meta.env.VITE_API_URL || 'https://moonstonecafe.onrender.com/api').replace(/\/api$/, '')}${url}`;
 };
 
 const Profile = () => {

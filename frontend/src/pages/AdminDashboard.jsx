@@ -540,7 +540,7 @@ const AdminDashboard = () => {
                                         .map(item => (
                                             <tr key={item.id} className="hover:bg-heritage-stone/30 transition-colors">
                                                 <td className="p-6 flex items-center gap-4">
-                                                    <img src={item.image_url ? (item.image_url.startsWith('http') ? item.image_url : `${(import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')}${item.image_url}`) : 'https://via.placeholder.com/50'} alt="mini" className="w-16 h-16 rounded-xl object-cover shadow-sm" />
+                                                    <img src={item.image_url ? (item.image_url.startsWith('http') ? item.image_url : `${(import.meta.env.VITE_API_URL || 'https://moonstonecafe.onrender.com/api').replace(/\/api$/, '')}${item.image_url}`) : 'https://via.placeholder.com/50'} alt="mini" className="w-16 h-16 rounded-xl object-cover shadow-sm" />
                                                     <div>
                                                         <div className="font-bold text-heritage-espresso text-lg font-serif">{item.name}</div>
                                                         <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full ${item.is_veg ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
@@ -903,7 +903,7 @@ const AdminDashboard = () => {
                                         {imagePreview ? (
                                             <div className="relative group">
                                                 <img
-                                                    src={imagePreview.startsWith('blob:') || imagePreview.startsWith('http') ? imagePreview : `${(import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api$/, '')}${imagePreview}`}
+                                                    src={imagePreview.startsWith('blob:') || imagePreview.startsWith('http') ? imagePreview : `${(import.meta.env.VITE_API_URL || 'https://moonstonecafe.onrender.com/api').replace(/\/api$/, '')}${imagePreview}`}
                                                     alt="Preview"
                                                     className="w-full h-48 object-cover rounded-2xl"
                                                 />
