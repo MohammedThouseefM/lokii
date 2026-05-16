@@ -1,9 +1,7 @@
 const db = require('../config/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { OAuth2Client } = require('google-auth-library');
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const generateToken = (id, name, email) => {
     return jwt.sign({ id, name, email }, process.env.JWT_SECRET || 'fallback_secret', { expiresIn: '30d' });
@@ -59,7 +57,7 @@ const loginUser = async (req, res) => {
             const user = rows[0];
 
             if (!user.password_hash) {
-                return res.status(400).json({ message: 'Please login using Google' });
+                return res.status(400).json({ message: 'User signed up with an external provider. Please login appropriately.' });
             }
 
             const match = await bcrypt.compare(password, user.password_hash);
@@ -85,53 +83,4 @@ const loginUser = async (req, res) => {
     }
 };
 
-// @desc    Login/Register using Google OAuth Token
-// @route   POST /api/users/auth/google
-// @access  Public
-const googleLogin = async (req, res) => {
-    const { credential } = req.body;
-
-    if (!credential) {
-        return res.status(400).json({ message: 'No Google credential provided' });
-    }
-
-    try {
-        const ticket = await client.verifyIdToken({
-            idToken: credential,
-            audience: process.env.GOOGLE_CLIENT_ID
-        });
-
-        const payload = ticket.getPayload();
-        const { sub, name, email } = payload; // sub is google_id
-
-        const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email]);
-        let user;
-
-        if (rows.length > 0) {
-            // User exists, update google_id if missing
-            user = rows[0];
-            if (!user.google_id) {
-                await db.query('UPDATE users SET google_id = ? WHERE id = ?', [sub, user.id]);
-            }
-        } else {
-            // Create user
-            const [result] = await db.query('INSERT INTO users (name, email, google_id) VALUES (?, ?, ?)', [name, email, sub]);
-            user = { id: result.insertId, name, email, google_id: sub };
-        }
-
-        res.json({
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            phone: user.phone || '',
-            address: user.address || '',
-            token: generateToken(user.id, user.name, user.email)
-        });
-
-    } catch (error) {
-        console.error(error);
-        res.status(401).json({ message: 'Invalid Google token', error: error.message });
-    }
-};
-
-module.exports = { registerUser, loginUser, googleLogin };
+module.exports = { registerUser, loginUser };

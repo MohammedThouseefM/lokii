@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { GoogleLogin } from '@react-oauth/google';
+
 import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 
@@ -33,22 +33,6 @@ const Login = () => {
             console.error(error);
             toast.error(error.response?.data?.message || 'Authentication Failed');
         }
-    };
-
-    const handleGoogleSuccess = async (credentialResponse) => {
-        try {
-            const { data } = await api.post('/users/auth/google', { credential: credentialResponse.credential });
-            login(data, data.token);
-            toast.success(`Welcome, ${data.name}!`);
-            navigate('/');
-        } catch (error) {
-            console.error(error);
-            toast.error('Google Authentication Failed');
-        }
-    };
-
-    const handleGoogleError = () => {
-        toast.error('Google Login Failed');
     };
 
     return (
@@ -101,22 +85,6 @@ const Login = () => {
                         {isLoginMode ? 'Sign In' : 'Create Account'}
                     </button>
                 </form>
-
-                <div className="mt-8 mb-6 flex items-center justify-center">
-                    <div className="border-t border-heritage-espresso/10 w-full"></div>
-                    <span className="px-4 text-xs font-bold uppercase text-heritage-espresso/50">OR</span>
-                    <div className="border-t border-heritage-espresso/10 w-full"></div>
-                </div>
-
-                <div className="flex justify-center w-full">
-                    <GoogleLogin
-                        onSuccess={handleGoogleSuccess}
-                        onError={handleGoogleError}
-                        shape="pill"
-                        size="large"
-                        text={isLoginMode ? "signin_with" : "signup_with"}
-                    />
-                </div>
 
                 <div className="mt-8 text-center">
                     <button 
