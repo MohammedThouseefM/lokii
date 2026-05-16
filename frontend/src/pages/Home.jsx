@@ -22,12 +22,12 @@ const Home = () => {
             />
 
             {/* 1. HERO - THE BLEND */}
-            <section className="relative min-h-screen flex items-center pt-24 px-6 md:px-12 overflow-hidden">
+            <section className="relative min-h-screen flex items-center pt-40 pb-10 md:pt-32 px-6 md:px-12 overflow-hidden">
                 {/* Abstract Color Blobs */}
                 <div className="absolute top-0 right-0 w-[50vw] h-[80vh] bg-heritage-clay/20 rounded-bl-full blur-3xl -z-10"></div>
                 <div className="absolute bottom-0 left-0 w-[40vw] h-[60vh] bg-heritage-olive/10 rounded-tr-full blur-3xl -z-10"></div>
 
-                <div className="container mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+                <div className="container mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center mt-20 md:mt-0">
                     <div className="md:col-span-7 relative z-10">
                         <motion.span
                             initial={{ opacity: 0, x: -20 }}
